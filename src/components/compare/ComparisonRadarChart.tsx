@@ -25,7 +25,7 @@ const RadialAreaChart = ({
 				const size = Math.min(rect.width, rect.height);
 
 				// clamp between 330 and 500
-				setWidth(Math.max(330, Math.min(size, 500)));
+				setWidth(Math.max(300, Math.min(size, 500)));
 			}
 		}
 		handleResize();
