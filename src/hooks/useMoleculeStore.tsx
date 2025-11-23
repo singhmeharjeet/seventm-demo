@@ -1,14 +1,14 @@
 import React from "react";
 
-import type { ProtacRow } from "@/db";
+import type { Molecule } from "@/db";
 import type { DebouncedState } from "use-debounce";
 
 export const MoleculeStoreContext = React.createContext<{
-	selectedMolecule: ProtacRow | null;
-	setSelectedMolecule: React.Dispatch<React.SetStateAction<ProtacRow | null>>;
+	selectedMolecule: Molecule | null;
+	setSelectedMolecule: React.Dispatch<React.SetStateAction<Molecule | null>>;
 	searchTerm: string;
 	setSearchTerm: DebouncedState<(value: string) => void>;
-	filteredData: ProtacRow[];
+	filteredData: Molecule[];
 }>({
 	selectedMolecule: null,
 	setSelectedMolecule: () => {},

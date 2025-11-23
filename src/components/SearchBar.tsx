@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/input-group";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import useMoleculeStore from "@/hooks/useMoleculeStore";
-import type { ProtacRow } from "@/db";
+import type { Molecule } from "@/db";
 
 import { List, type RowComponentProps } from "react-window";
 import type { DebouncedState } from "use-debounce";
@@ -93,10 +93,10 @@ function ListTable({
 	setSearchTerm,
 	setSelectedMolecule,
 }: {
-	rows: ProtacRow[];
+	rows: Molecule[];
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setSearchTerm: DebouncedState<(value: string) => void>;
-	setSelectedMolecule: React.Dispatch<React.SetStateAction<ProtacRow | null>>;
+	setSelectedMolecule: React.Dispatch<React.SetStateAction<Molecule | null>>;
 }) {
 	const ref = React.useRef<HTMLDivElement>(null);
 
@@ -141,10 +141,10 @@ function ListRow({
 	setSearchTerm,
 	setSelectedMolecule,
 }: RowComponentProps<{
-	rows: ProtacRow[];
+	rows: Molecule[];
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setSearchTerm: DebouncedState<(value: string) => void>;
-	setSelectedMolecule: React.Dispatch<React.SetStateAction<ProtacRow | null>>;
+	setSelectedMolecule: React.Dispatch<React.SetStateAction<Molecule | null>>;
 }>) {
 	const molecule = rows[index];
 	return (
@@ -169,12 +169,16 @@ function ListRow({
 				<div className="font-medium text-muted-foreground">
 					{index + 1}
 				</div>
-				<div className="truncate font-semibold">{molecule.name}</div>
-				<div className="truncate">{molecule.poi}</div>
+				<div className="truncate font-semibold">
+					{molecule.poi.drug.name}
+				</div>
+				<div className="truncate">{molecule.poi.gene_symbol}</div>
 				<div className="truncate">{molecule.ligase}</div>
-				<div className="hidden truncate md:block">{molecule.dbid}</div>
 				<div className="hidden truncate md:block">
-					{molecule.uniprot}
+					{molecule.poi.drug.drug_bank_id}
+				</div>
+				<div className="hidden truncate md:block">
+					{molecule.poi.uniprot_id}
 				</div>
 			</div>
 		</CommandItem>

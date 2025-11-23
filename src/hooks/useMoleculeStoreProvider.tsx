@@ -1,4 +1,4 @@
-import { getData, getFuse, type ProtacRow } from "@/db";
+import { getData, getFuse, type Molecule } from "@/db";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { MoleculeStoreContext } from "./useMoleculeStore";
@@ -10,17 +10,17 @@ export const MoleculeStoreProvider = ({
 	children: React.ReactNode;
 }) => {
 	// Global selected molecule (minimal state)
-	const [selectedMolecule, setSelectedMolecule] = useState<ProtacRow | null>(
+	const [selectedMolecule, setSelectedMolecule] = useState<Molecule | null>(
 		null,
 	);
 
 	// Search term (debounced)
 	const [searchTerm, setSearchTerm] = useState("");
 
-	const [fuse, setFuse] = useState<Fuse<ProtacRow> | null>(null);
+	const [fuse, setFuse] = useState<Fuse<Molecule> | null>(null);
 
 	// Raw data + Fuse instance stored only once
-	const [data, setData] = useState<ProtacRow[] | null>(null);
+	const [data, setData] = useState<Molecule[] | null>(null);
 
 	const debounced = useDebouncedCallback(
 		// function

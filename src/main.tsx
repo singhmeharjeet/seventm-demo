@@ -42,10 +42,10 @@ export function App() {
 
 				<SearchBar className="w-full sm:max-w-xs" />
 			</header>
-			
 
-			{!selectedMolecule && <EmptyMuted />}
-			{selectedMolecule && (
+			{!selectedMolecule ? (
+				<EmptyMuted />
+			) : (
 				<main className="grid grid-cols-1 gap-2 @3xl/main:grid-cols-2">
 					<MoleculeViewer className="col-span-1" />
 					<ProtienViewer className="col-span-1" />
