@@ -29,7 +29,7 @@ export default function MoleculeViewer(props: React.ComponentProps<"div">) {
 		<Card className={cn("", props.className)} {...props}>
 			<CardHeader>
 				<CardTitle>{selectedMolecule?.uniprot}</CardTitle>
-				<CardDescription>Uniport ID</CardDescription>
+				<CardDescription>Uniprot ID</CardDescription>
 			</CardHeader>
 			<CardContent className="flex w-full flex-col gap-2">
 				<MoleculeSVG
