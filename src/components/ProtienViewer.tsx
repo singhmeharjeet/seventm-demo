@@ -25,9 +25,6 @@ import MolViewer from "./Viewer3D";
 export default function ProtienViewer(props: React.ComponentProps<"div">) {
 	const { selectedMolecule } = useMoleculeStore();
 	const [selectedCluster, setSelectedCluster] = useState<number>(0);
-	const [clusterPDB, setClusterPDB] = useState<string[]>(
-		Array.from({ length: 5 }, () => ""),
-	);
 
 	const [best_pdb, setBestPdb] = useState<string>("");
 
@@ -79,7 +76,7 @@ export default function ProtienViewer(props: React.ComponentProps<"div">) {
 							<SelectContent>
 								<SelectGroup>
 									<SelectLabel>Conformers</SelectLabel>
-									{clusterPDB.map((_, index) => (
+									{Array(5).fill(null).map((_, index) => (
 										<SelectItem
 											key={index}
 											value={`cluster${index + 1}`}
