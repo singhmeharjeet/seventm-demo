@@ -18,11 +18,15 @@ import "./index.css";
 import { SearchBar } from "@/components/SearchBar";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import useMoleculeStore from "@/hooks/useMoleculeStore";
+import { ModeToggle } from "./components/ThemeToggle";
+import { ThemeProvider } from "./hooks/useTheme";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<MoleculeStoreProvider>
-			<App />
+			<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+				<App />
+			</ThemeProvider>
 		</MoleculeStoreProvider>
 	</StrictMode>,
 );
@@ -54,9 +58,13 @@ export function App() {
 			)}
 
 			<footer className="mt-8 w-full p-4">
-				<p className="py-4 text-center text-sm text-muted-foreground">
-					&copy; 2025 Drug Discovery Platform. All rights reserved.
-				</p>
+				<div className="py-4 text-center text-sm text-muted-foreground flex gap-4 justify-center items-center">
+					<span>
+						&copy; 2025 Drug Discovery Platform. All rights
+						reserved.
+					</span>
+					<ModeToggle />
+				</div>
 			</footer>
 		</div>
 	);
