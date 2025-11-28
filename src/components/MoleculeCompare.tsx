@@ -8,11 +8,11 @@ import {
 	CardTitle,
 } from "./ui/card";
 
-import ComparisonRadarChart from "@/components/compare/ComparisonRadarChart";
 import ComparisonTable from "@/components/compare/ComparisonTable";
 import DrugSelector from "@/components/compare/DrugSelector";
 import { DrugCompareProvider } from "@/hooks/useDrugCompare";
 import { Atom } from "lucide-react";
+import RadialAreaChart from "./compare/RadarChart";
 import {
 	Empty,
 	EmptyDescription,
@@ -114,12 +114,11 @@ function MoleculeCompare(props: React.ComponentProps<"div">) {
 					<div className="grid grid-cols-1 gap-2 @3xl/card-content:grid-cols-2">
 						{comparisonDrugs.length !== 0 && (
 							<>
-								<div className="col-span-1 max-h-[500px] min-h-[350px] w-full justify-center">
-									<ComparisonRadarChart
-										data={comparisonDrugs}
-										colorFn={color}
-									/>
-								</div>
+								<RadialAreaChart
+									data={comparisonDrugs}
+									colorFn={color}
+									levels={4}
+								/>
 
 								<ComparisonTable
 									className="col-span-1"
