@@ -21,6 +21,8 @@ import {
 	SelectValue,
 } from "./ui/select";
 import MolViewer from "./Viewer3D";
+import { Skeleton } from "./ui/skeleton";
+import { Spinner } from "./ui/spinner";
 
 export default function ProtienViewer(props: React.ComponentProps<"div">) {
 	const { selectedMolecule } = useMoleculeStore();
@@ -76,14 +78,16 @@ export default function ProtienViewer(props: React.ComponentProps<"div">) {
 							<SelectContent>
 								<SelectGroup>
 									<SelectLabel>Conformers</SelectLabel>
-									{Array(5).fill(null).map((_, index) => (
-										<SelectItem
-											key={index}
-											value={`cluster${index + 1}`}
-										>
-											Conformer {index + 1}
-										</SelectItem>
-									))}
+									{Array(5)
+										.fill(null)
+										.map((_, index) => (
+											<SelectItem
+												key={index}
+												value={`cluster${index + 1}`}
+											>
+												Conformer {index + 1}
+											</SelectItem>
+										))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -91,7 +95,7 @@ export default function ProtienViewer(props: React.ComponentProps<"div">) {
 				</div>
 			</CardHeader>
 			<CardContent className="flex w-full flex-col gap-2">
-				{best_pdb && (
+				{best_pdb ? (
 					<MolViewer
 						molecule_uri={
 							"https://files.rcsb.org/download/" +
@@ -100,6 +104,10 @@ export default function ProtienViewer(props: React.ComponentProps<"div">) {
 						}
 						rotate_by={selectedCluster}
 					/>
+				) : (
+					<Skeleton className="flex aspect-square w-full">
+						<Spinner className="m-auto self-center" />
+					</Skeleton>
 				)}
 
 				<div className="grid grid-cols-2 gap-3 lg:grid-cols-3">

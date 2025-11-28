@@ -29,6 +29,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select";
+import { Spinner } from "./ui/spinner";
 
 export default function MoleculeViewer(props: React.ComponentProps<"div">) {
 	const { selectedMolecule } = useMoleculeStore();
@@ -139,7 +140,6 @@ function Render2DSmiles({
 		async function drawMolecule() {
 			const mol = RDKit?.get_mol(smiles || "invalid");
 			if (!mol) {
-				console.error("Invalid molecule for SMILES:", smiles);
 				setSvg(""); // clear SVG
 				return;
 			}
@@ -183,13 +183,16 @@ function Render2DSmiles({
 function Render3DSmiles({ smiles }: { smiles: string }) {
 	const OB = useOpenBabel();
 
-	if (!OB) return <Skeleton className="aspect-square w-full" />;
-
-	console.log(OB);
+	if (!OB) {
+		return (
+			<Skeleton className="flex aspect-square w-full">
+				<Spinner className="m-auto self-center" />
+			</Skeleton>
+		);
+	}
 
 	const mol = new OB.OBMol(); // similes >> OBMol >> PDB
 
-	console.log(mol);
 	const conv = new OB.ObConversionWrapper();
 
 	try {
